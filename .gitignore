@@ -1,8 +1,4 @@
 .DS_Store
 id_ed25519
 splash.*
-.ssh
-.histfile
-.lesshst
-.bash_history
-.zsh_history
+user
