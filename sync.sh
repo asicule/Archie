@@ -5,7 +5,7 @@ rm /boot/grub/themes/custom/*.ttf 2> /dev/null
 rm /boot/grub/themes/custom/*.png 2> /dev/null
 rm /boot/grub/themes/custom/*.jpg 2> /dev/null
 rm /boot/grub/themes/custom/*.svg 2> /dev/null
-" || exit 1
+"
 
 rsync -r ./root/ target:/  || exit 1
 
