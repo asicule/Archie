@@ -8,6 +8,6 @@ done || exit 1
 
 HOME=/home/$USER
 
-rsync -avh --delete ./script/* target:/script/ && \
+rsync -avh --delete ./scripts/* target:/script/ && \
 rsync -auv --exclude-from="./.syncignore" target:$HOME/ ./user && \
 rsync ./user target:$HOME
