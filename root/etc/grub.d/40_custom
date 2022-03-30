@@ -1,54 +1,65 @@
 #!/bin/sh
 exec tail -n +3 $0
 
-menuentry "Arch - intel" --class arch-blue {
+# blkid /dev/sdx...
+# /boot (efi)
+set EFI_DEV_HINT=0
+set EFI_DEV_HINT_PART=1
+set EFI_DEV_UUID=54DA-F476
+# / (root)
+set ROOT_DEV_UUID=135e05f9-7820-4718-8189-6f4635f025ad
+# amd or intel
+set CPU_VENDOR=intel
+
+menuentry "Arch - $CPU_VENDOR" --class arch-blue {
     savedefault
     load_video
     set gfxpayload=keep
     insmod gzio
     insmod part_gpt
     insmod fat
-    set root='hd0,gpt1'
+    set root=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART
     if [ x$feature_platform_search_hint = xy ]; then
-        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-efi=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-baremetal=ahci$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART  $EFI_DEV_UUID
     else
-        search --no-floppy --fs-uuid --set=root 54DA-F476
+        search --no-floppy --fs-uuid --set=root $EFI_DEV_UUID
     fi
-    linux /vmlinuz-linux root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
-    initrd /intel-ucode.img /initramfs-linux.img
+    linux /vmlinuz-linux root=UUID=$ROOT_DEV_UUID rw
+    initrd /$CPU_VENDOR-ucode.img /initramfs-linux.img
 }
 
-menuentry "ArchZEN - intel" --class arch-black {
+menuentry "ArchZEN - $CPU_VENDOR" --class arch-black {
     savedefault
     load_video
     set gfxpayload=keep
     insmod gzio
     insmod part_gpt
     insmod fat
-    set root='hd0,gpt1'
+    set root=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART
     if [ x$feature_platform_search_hint = xy ]; then
-        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-efi=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-baremetal=ahci$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART  $EFI_DEV_UUID
     else
-        search --no-floppy --fs-uuid --set=root 54DA-F476
+        search --no-floppy --fs-uuid --set=root $EFI_DEV_UUID
     fi
-    linux /vmlinuz-linux-zen root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
-    initrd /intel-ucode.img /initramfs-linux-zen.img
+    linux /vmlinuz-linux-zen root=UUID=$ROOT_DEV_UUID rw
+    initrd /$CPU_VENDOR-ucode.img /initramfs-linux-zen.img
 }
 
-menuentry "ArchLTS - intel" {
+// BACKUP IMAGE
+menuentry "ArchLTS - INTEL" {
     savedefault
     load_video
     set gfxpayload=keep
     insmod gzio
     insmod part_gpt
     insmod fat
-    set root='hd0,gpt1'
+    set root=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART
     if [ x$feature_platform_search_hint = xy ]; then
-        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-efi=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-baremetal=ahci$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART  $EFI_DEV_UUID
     else
-        search --no-floppy --fs-uuid --set=root 54DA-F476
+        search --no-floppy --fs-uuid --set=root $EFI_DEV_UUID
     fi
-    linux /vmlinuz-linux-lts root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    linux /vmlinuz-linux-lts root=UUID=$ROOT_DEV_UUID rw
     initrd /intel-ucode.img /initramfs-linux-lts.img
 }
 
@@ -59,13 +70,13 @@ menuentry "ArchLTS - AMD" {
     insmod gzio
     insmod part_gpt
     insmod fat
-    set root='hd0,gpt1'
+    set root=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART
     if [ x$feature_platform_search_hint = xy ]; then
-        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-efi=hd$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART --hint-baremetal=ahci$EFI_DEV_HINT,gpt$EFI_DEV_HINT_PART  $EFI_DEV_UUID
     else
-        search --no-floppy --fs-uuid --set=root 54DA-F476
+        search --no-floppy --fs-uuid --set=root $EFI_DEV_UUID
     fi
-    linux /vmlinuz-linux-lts root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    linux /vmlinuz-linux-lts root=UUID=$ROOT_DEV_UUID rw
     initrd /amd-ucode.img /initramfs-linux-lts.img
 }
 
