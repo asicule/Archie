@@ -1,0 +1,6 @@
+[Utils]
+visual-studio-code-bin
+
+[ZSH]
+# oh-my-zsh-git
+zsh-theme-powerlevel10k-git

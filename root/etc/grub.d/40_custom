@@ -1,0 +1,79 @@
+#!/bin/sh
+exec tail -n +3 $0
+
+menuentry "Arch - intel" --class arch-blue {
+    savedefault
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod fat
+    set root='hd0,gpt1'
+    if [ x$feature_platform_search_hint = xy ]; then
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+    else
+        search --no-floppy --fs-uuid --set=root 54DA-F476
+    fi
+    linux /vmlinuz-linux root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    initrd /intel-ucode.img /initramfs-linux.img
+}
+
+menuentry "ArchZEN - intel" --class arch-black {
+    savedefault
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod fat
+    set root='hd0,gpt1'
+    if [ x$feature_platform_search_hint = xy ]; then
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+    else
+        search --no-floppy --fs-uuid --set=root 54DA-F476
+    fi
+    linux /vmlinuz-linux-zen root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    initrd /intel-ucode.img /initramfs-linux-zen.img
+}
+
+menuentry "ArchLTS - intel" {
+    savedefault
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod fat
+    set root='hd0,gpt1'
+    if [ x$feature_platform_search_hint = xy ]; then
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+    else
+        search --no-floppy --fs-uuid --set=root 54DA-F476
+    fi
+    linux /vmlinuz-linux-lts root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    initrd /intel-ucode.img /initramfs-linux-lts.img
+}
+
+menuentry "ArchLTS - AMD" {
+    savedefault
+    load_video
+    set gfxpayload=keep
+    insmod gzio
+    insmod part_gpt
+    insmod fat
+    set root='hd0,gpt1'
+    if [ x$feature_platform_search_hint = xy ]; then
+        search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  54DA-F476
+    else
+        search --no-floppy --fs-uuid --set=root 54DA-F476
+    fi
+    linux /vmlinuz-linux-lts root=UUID=135e05f9-7820-4718-8189-6f4635f025ad rw
+    initrd /amd-ucode.img /initramfs-linux-lts.img
+}
+
+menuentry "Shutdown" {
+    echo "Shutdown..."
+    halt
+}
+
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
