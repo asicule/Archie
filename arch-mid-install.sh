@@ -53,9 +53,6 @@ pacman -Syu --noconfirm grub efibootmgr && \
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub && \
 grub-mkconfig -o /boot/grub/grub.cfg
 
-curl https://raw.githubusercontent.com/lastLunarEclipse/Archie/arch-post-install.sh > /home/$USERNAME/arch-post-install.sh && \
-chmod +x /home/$USERNAME/arch-post-install.sh
-
 echo "Do you want to enable some services?[y/n] " && \
 read ENABLE_SERVICES
 if [ $ENABLE_SERVICES == 'y' ]; do
