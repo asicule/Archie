@@ -11,12 +11,16 @@ efibootmgr
 
 [Minimal]
 base
-linux-firmware
+#linux-firmware
 
 [Text]
 vim
 less
 more
+
+[Terminal emulator]
+xterm
+rxvt-unicode
 
 [System]
 sudo
@@ -41,6 +45,12 @@ xorg-server
 xorg-xinit
 xorg-xrandr
 mesa-utils
+apcid
+#xf86-video-intel
+#xf86-video-vesa
+#xf86-video-fbdev
+#xorg-xbacklight
+redshift
 
 [Networking]
 iproute2

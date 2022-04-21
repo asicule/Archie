@@ -60,5 +60,6 @@ if [ $ENABLE_SERVICES == 'y' ]; do
     systemctl enable NetworkManager.service && \
     systemctl enable wpa_supplicant.service && \
     systemctl enable sshd.service && \
-    systemctl enable bluetooth.service
+    systemctl enable bluetooth.service && \
+    systemctl enable acpid.service
 done
