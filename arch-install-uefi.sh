@@ -5,12 +5,6 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-echo "Do you want to configure package list? (y/n)"
-read answer
-if [ "$answer" = "y" ]; then
-    vim packageList
-fi
-
 clear
 echo "Unmounting partitions..."
 swapoff -a
@@ -57,19 +51,18 @@ mkdir /mnt/boot && \
 mount /dev/$DEV"1" /mnt/boot && \
 swapon /dev/$DEV"2"
 echo "###############################################################################"
+echo "Please enter package that you want to install"
+read packageList
+pacstrap /mnt $packageList
 
-grep -v -E '^#|^\[' packageList | pacstrap /mnt
 echo "###############################################################################"
 
 echo "Generating fstab" && \
 genfstab -U /mnt >> /mnt/etc/fstab && \
 
-echo "###############################################################################"
-echo "Downloading Arch Linux chroot script" && \
+echo "###############################################################################" && \
 cp arch-mid-install.sh /mnt/arch-mid-install.sh && \
 chmod +x /mnt/arch-mid-install.sh && \
-
-echo "###############################################################################" && \
 echo "Changing root" && \
 echo "Please run arch-mid-install.sh in chroot" && \
 
