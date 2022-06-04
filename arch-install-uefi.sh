@@ -73,6 +73,8 @@ echo "Please run arch-mid-install.sh in chroot"
 echo "Changing root"
 arch-chroot /mnt || exit 1
 
+sleep 1
+
 swapoff -a || exit 1
 umount /mnt/boot || exit 1
 umount /mnt || exit 1
