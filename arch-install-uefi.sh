@@ -53,10 +53,12 @@ swapon /dev/$sdx"2" || exit 1
 echo "###############################################################################"
 echo "Please enter packages that you want to install"
 read packageList || exit 1
+echo "amd or intel"
+read arch || exit 1
 echo "Do you want to include recommanded package? [y/n]"
 read include_recommand || exit 1
 if [ "$include_recommand" = "y" ]; then
-    packageList="linux linux-firmware base git less vim sudo man-db networkmanager wpa_supplicant bluez zsh $packageList"
+    packageList="linux linux-firmware base git less vim sudo man-db networkmanager wpa_supplicant bluez zsh $arch-ucode $packageList"
 fi
 pacstrap /mnt $packageList || exit 1
 
