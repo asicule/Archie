@@ -56,7 +56,7 @@ read packageList || exit 1
 echo "Do you want to include recommanded package? [y/n]"
 read include_recommand
 if [ "$include_recommand" = "y" ]; then
-    packageList="linux base git less vim $packageList"
+    packageList="linux base git less vim sudo man-db networkmanager wpa_supplicant bluez $packageList"
 pacstrap /mnt $packageList || exit 1
 
 echo "###############################################################################"
