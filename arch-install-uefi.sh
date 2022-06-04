@@ -56,7 +56,7 @@ read packageList || exit 1
 echo "Do you want to include recommanded package? [y/n]"
 read include_recommand || exit 1
 if [ "$include_recommand" = "y" ]; then
-    packageList="linux base git less vim sudo man-db networkmanager wpa_supplicant bluez zsh $packageList"
+    packageList="linux linux-firmware base git less vim sudo man-db networkmanager wpa_supplicant bluez zsh $packageList"
 fi
 pacstrap /mnt $packageList || exit 1
 
@@ -79,11 +79,6 @@ swapoff -a || exit 1
 umount /mnt/boot || exit 1
 umount /mnt || exit 1
 
-echo "Do you want to reboot now?"
-read REBOOT || exit 1
-if [ "$REBOOT" = "y" ]; then
-    echo "###############################################################################"
-    echo "Rebooting... please remove the installation medium"
-    sleep 5
-    reboot || exit 0
-fi
+sleep 1
+
+reboot
