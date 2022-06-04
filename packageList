@@ -21,6 +21,8 @@ more
 [Terminal emulator]
 xterm
 rxvt-unicode
+alacritty
+kitty
 
 [System]
 sudo
@@ -41,11 +43,13 @@ htop
 imagemagick
 
 [Display]
-xorg-server
-xorg-xinit
-xorg-xrandr
-mesa-utils
-apcid
+#xorg-server
+#xorg-xinit
+#xorg-xrandr
+#mesa-utils
+#wayland
+#xorg-xwayland
+#apcid
 #xf86-video-intel
 #xf86-video-vesa
 #xf86-video-fbdev
