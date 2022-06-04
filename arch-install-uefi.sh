@@ -5,9 +5,6 @@ if [ "$(id -u)" != "0" ]; then
    exit 1
 fi
 
-echo "Downloading package list..."
-curl -s https://raw.githubusercontent.com/lastLunarEclipse/Archie/packageList > packageList
-
 echo "Do you want to configure package list? (y/n)"
 read answer
 if [ "$answer" = "y" ]; then
