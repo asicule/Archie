@@ -53,6 +53,10 @@ swapon /dev/$sdx"2" || exit 1
 echo "###############################################################################"
 echo "Please enter packages that you want to install"
 read packageList || exit 1
+echo "Do you want to include recommanded package? [y/n]"
+read include_recommand
+if [ "$include_recommand" = "y" ]; then
+    packageList="linux base git less vim $packageList"
 pacstrap /mnt $packageList || exit 1
 
 echo "###############################################################################"
