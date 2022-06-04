@@ -6,7 +6,7 @@
 title-text: "Archie"
 desktop-image: "splash.png"
 desktop-color: "#ffffff"
-terminal-font: "Terminus Regular 14"
+#terminal-font: ""
 terminal-box: "terminal_box_*.png"
 terminal-left: "20%"
 terminal-top: "20%"

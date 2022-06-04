@@ -50,7 +50,7 @@ apcid
 #xf86-video-vesa
 #xf86-video-fbdev
 #xorg-xbacklight
-redshift
+#redshift
 
 [Networking]
 iproute2

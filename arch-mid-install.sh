@@ -3,8 +3,11 @@
 echo "###############################################################################" && \
 sleep 1 && \
 
+echo "What editor do you want to use [nano/vim/etc.]" && \
+read EDITOR && \
+
 echo "Setting up locale" && \
-vim /etc/locale.gen && \
+$EDITOR /etc/locale.gen && \
 
 ls /usr/share/zoneinfo | less && \
 echo "Please enter your region timezone:" && \
