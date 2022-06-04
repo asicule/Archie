@@ -54,10 +54,11 @@ echo "##########################################################################
 echo "Please enter packages that you want to install"
 read packageList || exit 1
 echo "Do you want to include recommanded package? [y/n]"
-read include_recommand
+read include_recommand || exit 1
 if [ "$include_recommand" = "y" ]; then
-    $recommand_package="linux base git less vim sudo man-db networkmanager wpa_supplicant bluez"
-pacstrap /mnt $recommand_package $packageList || exit 1
+    packageList="linux base git less vim sudo man-db networkmanager wpa_supplicant bluez $packageList"
+fi
+pacstrap /mnt $packageList || exit 1
 
 echo "###############################################################################"
 
