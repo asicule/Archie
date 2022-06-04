@@ -35,13 +35,6 @@ Put background image as [splash.png](./root/boot/grub/themes/custom)
       - wpa_supplicant
       - sshd
       - bluetooth
-
-## Remote
- - [sync-config](./sync-config.sh)  
-    - sync /script
-    - sync /home/$USER
- - [ssh-cycle](./ssh-cycle.sh)
-    - run ssh loop
 # LICENSE
 `All file that aren't list below is under MIT License`
 ### Third party
