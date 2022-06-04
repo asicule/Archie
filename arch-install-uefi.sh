@@ -61,8 +61,6 @@ mount /dev/$DEV"1" /mnt/boot && \
 swapon /dev/$DEV"2"
 echo "###############################################################################"
 
-gpg --refresh-keys
-pacman-key --populate
 grep -v -E '^#|^\[' packageList | pacstrap /mnt
 echo "###############################################################################"
 
@@ -71,12 +69,13 @@ genfstab -U /mnt >> /mnt/etc/fstab && \
 
 echo "###############################################################################"
 echo "Downloading Arch Linux chroot script" && \
-curl https://raw.githubusercontent.com/lastLunarEclipse/Archie/arch-mid-install.sh > /mnt/arch-mid-install.sh && \
+cp arch-mid-install.sh /mnt/arch-mid-install.sh && \
 chmod +x /mnt/arch-mid-install.sh && \
 
 echo "###############################################################################" && \
 echo "Changing root" && \
 echo "Please run arch-mid-install.sh in chroot" && \
+
 arch-chroot /mnt || exit 1
 
 swapoff -a && \
