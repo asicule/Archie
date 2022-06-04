@@ -35,7 +35,7 @@ parted /dev/$DEV mkpart ESP 1MiB 512MiB && \
 echo "Creating swap partition" && \
 parted /dev/$DEV mkpart primary linux-swap 512MiB $SWAP_SIZE"GiB" && \
 echo "Creating root partition" && \
-parted /dev/$DEV mkpart primary ext4 $SWAP_SIZE.5GiB 100% && \
+yes | parted /dev/$DEV mkpart primary ext4 $SWAP_SIZE.5GiB 100% && \
 
 mkfs.fat -F32 /dev/$DEV"1" && \
 mkswap /dev/$DEV"2" && \
