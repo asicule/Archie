@@ -3,6 +3,7 @@
 echo "###############################################################################"
 sleep 1
 
+pacman -Syyu
 echo "What editor do you want to use [nano/vim/etc.]"
 read EDITOR
 
@@ -52,17 +53,17 @@ echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers || exit 1
 echo "--------------------------------------------------------------------------------"
 
 echo "Installing grub for UEFI system"
-pacman -Syu --noconfirm grub efibootmgr || exit 1
+pacman -S --needed --noconfirm grub efibootmgr || exit 1
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub || exit 1
 grub-mkconfig -o /boot/grub/grub.cfg
 
-echo "Do you want to enable some services?[y/n] "
-read ENABLE_SERVICES
-if [ $ENABLE_SERVICES == 'y' ]; do
+echo "Do you want to enable wireless services?[y/n] "
+read ENABLE_WIRELESS_SERVICES
+if [ $ENABLE_WIRELESS_SERVICES == 'y' ]; do
+    pacman -S --needed network-manager wpa_supplicant bluez acpid
     echo "Enabling services"
     systemctl enable NetworkManager.service
     systemctl enable wpa_supplicant.service
-    systemctl enable sshd.service
     systemctl enable bluetooth.service
     systemctl enable acpid.service
 done

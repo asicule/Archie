@@ -51,7 +51,7 @@ mkdir /mnt/boot || exit 1
 mount /dev/$sdx"1" /mnt/boot || exit 1
 swapon /dev/$sdx"2" || exit 1
 echo "###############################################################################"
-echo "Please enter package that you want to install"
+echo "Please enter packages that you want to install"
 read packageList || exit 1
 pacstrap /mnt $packageList || exit 1
 
