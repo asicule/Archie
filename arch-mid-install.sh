@@ -60,7 +60,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "Do you want to enable wireless services?[y/n] "
 read ENABLE_WIRELESS_SERVICES
 if [ $ENABLE_WIRELESS_SERVICES == 'y' ]; do
-    pacman -S --needed network-manager wpa_supplicant bluez acpid
+    pacman -S --needed networkmanager wpa_supplicant bluez acpid
     echo "Enabling services"
     systemctl enable NetworkManager.service
     systemctl enable wpa_supplicant.service
